@@ -4,21 +4,23 @@ import { user_model } from "../models/user.model.js";
 
 export const CreateUser = async (req, res) => {
 
-try {
+    try {
 
-const validateData = matchedData(req)
+        const validateData = matchedData(req)
 
-    const { username, email, password, role, ...profileData } = validateData
+        const { username, email, password, role, ...profileData } = validateData
 
-const newUser = await user_model.create({username, email, password, role})
+        const newUser = await user_model.create({username, email, password, role})
 
-const newProfile = await profile_model.create({...profileData,user_id:newUser.id})
-return res.status(201).json(newProfile)
+        const newProfile = await profile_model.create({...profileData,user_id:newUser.id})
+
+        return res.status(201).json(newProfile)
     
-} catch (error) {
-    console.error(error);
-    return res.status(500).json({ok:false, msg: "error al intentar crear un nuevo user"})
-}
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ok:false, msg: "error al intentar crear un nuevo user"})
+    };
+};
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -114,7 +116,7 @@ export const updateUser = async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ ok: false, msg: "Error al actualizar usuario" });
-    }
+    };
 };
 
 
@@ -143,5 +145,5 @@ export const deleteUser = async (req, res) => {
             ok: false,
             msg: "Error al eliminar el usuario"
         });
-    }
+    };
 };

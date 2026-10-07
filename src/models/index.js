@@ -7,11 +7,11 @@ import { user_model } from "./user.model.js"
 
 export const db_relations = () => {
     //relacion 1 a 1
-    user_model.hasOne(profile_model, {foreignKey: "user_id", as:'profile'})
+    user_model.hasOne(profile_model, {foreignKey: "user_id", as:'author'})
     profile_model.belongsTo(user_model, {foreignKey: "user_id", as:'user'})
     //1 a muchos
-    article_model.belongsTo(user_model, {foreignKey: "user_id", as:"user"})
-    user_model.hasMany(article_model, {foreignKey: "user_id", as:'article'})
+    user_model.hasMany(article_model, {foreignKey: "user_id", as:'articles'})
+    article_model.belongsTo(user_model, {foreignKey: "user_id", as:"author"})
     // muchos a muchos
     article_model.belongsToMany(tag_model,{through:article_tag_model, foreignKey:"article_id", as:"tags"})
     tag_model.belongsToMany(article_model,{through:article_tag_model, foreignKey:"tag_id",as: "article"})
