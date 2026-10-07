@@ -1,10 +1,15 @@
 import 'dotenv/config'
 import express from "express"
 import { starBD } from './src/config/database.js'
+import { db_relations } from './src/models/index.js'
 
 const app = express()
 
-const PORT = process.env.PORT || 6767
+app.use(express.json())
+
+db_relations();
+
+const PORT = process.env.PORT || 2000;
 
 
 
