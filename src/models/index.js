@@ -16,3 +16,11 @@ export const db_relations = () => {
     article_model.belongsToMany(tag_model,{through:article_tag_model, foreignKey:"article_id", as:"tags"})
     tag_model.belongsToMany(article_model,{through:article_tag_model, foreignKey:"tag_id",as: "article"})
 }
+
+export {
+    user_model,
+    profile_model,
+    article_model,
+    tag_model,
+    article_tag_model
+};

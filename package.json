@@ -1,0 +1,33 @@
+{
+  "name": "integrador-1-tlp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludmy-al/trabajo-practico-integrador-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ludmy-al/trabajo-practico-integrador-1/issues"
+  },
+  "homepage": "https://github.com/ludmy-al/trabajo-practico-integrador-1#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "express-validation": "^4.1.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.5",
+    "sequelize": "^6.37.8"
+  }
+}
