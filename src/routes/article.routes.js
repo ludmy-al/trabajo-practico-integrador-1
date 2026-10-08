@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { validate } from "../middlewares/validate.js";
 import { NewArticleValidation, updateArticleValidation, validateArticleIdParam } from "../middlewares/validations/article.validations.js";
-import { createArticle, getArticleById, getMyArticleById, getMyArticles, getPublishedArticles, updateArticle } from "../controllers/article.controller.js";
+import { createArticle, deleteArticle, getArticleById, getMyArticleById, getMyArticles, getPublishedArticles, updateArticle } from "../controllers/article.controller.js";
 import { authMiddleware, ownerMiddleware } from "../middlewares/auth.middleware.js";
 
 const articleRoutes = Router();
@@ -12,6 +12,6 @@ articleRoutes.get("/articles/owner/:id", authMiddleware, ownerMiddleware, valida
 articleRoutes.get("/articles", authMiddleware, getPublishedArticles);
 articleRoutes.get("/articles/:id", authMiddleware, validateArticleIdParam, validate, getArticleById);
 articleRoutes.put("/articles/:id", authMiddleware, ownerMiddleware, updateArticleValidation, validate, updateArticle);
-articleRoutes.delete("/articles/:id", authMiddleware, ownerMiddleware, validateArticleIdParam, validate, updateArticle);
+articleRoutes.delete("/articles/:id", authMiddleware, ownerMiddleware, validateArticleIdParam, validate, deleteArticle);
 
 export { articleRoutes };
