@@ -15,6 +15,8 @@ export const db_relations = () => {
     // muchos a muchos
     article_model.belongsToMany(tag_model,{through:article_tag_model, foreignKey:"article_id", as:"tags"})
     tag_model.belongsToMany(article_model,{through:article_tag_model, foreignKey:"tag_id",as: "article"})
+     article_tag_model.belongsTo(article_model,{foreignKey:"article_id", as:"article"})
+     article_tag_model.belongsTo(tag_model,{foreignKey:"tag_id", as:"tag"})
 }
 
 export {
