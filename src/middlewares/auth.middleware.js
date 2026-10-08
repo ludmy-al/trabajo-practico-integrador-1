@@ -1,4 +1,5 @@
 import { user_model } from "../models/user.model.js";
+import { article_model } from "../models/article.model.js";
 import { verifyToken } from "../helpers/jwt.helper.js";
 
 export const authMiddleware = async (req, res, next) => {
@@ -36,13 +37,27 @@ export const adminMiddleware = (req, res, next) => {
     next();
 };
 
-export const ownerMiddleware = (req, res, next) => {
-    const resourceUserId = Number(req.params.id || req.params.userId || req.body.user_id);
-    const currentUserId = Number(req.user?.id);
+export const ownerMiddleware = async (req, res, next) => {
+    try {
+        if (req.user?.role === "admin") {
+            return next();
+        }
+        const resourceUserId = Number(req.params.id || req.params.userId || req.body.user_id);
+        const articleId = Number(req.params.id || req.body.article_Id || req.params.articleId);
 
-    if (req.user?.role === "admin" || currentUserId === resourceUserId) {
-        return next();
+        if (resouceUderId && (req.user?.id) === resourceUserId) {
+            return next();
+        }
+
+        if (articleId) {
+            const article = await article_model.findByPk(articleId);
+            if (article && article.user_id === Number(req.user?.id)) {
+                return next();
+            }
+        }
+        
+        return res.status(403).json({ ok: false, msg: "No tienes permisos para esta acción" });
+    } catch (error) {
+        return res.status(500).json({ ok: false, msg: "Error al verificar permisos" });
     }
-
-    return res.status(403).json({ ok: false, msg: "No tienes permisos para esta acción" });
 };

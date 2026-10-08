@@ -6,6 +6,11 @@ export const tag_model = sequelize.define(
     {
         name:{
             type:DataTypes.STRING(30),
+            allowNull: false,
+            unique: true,
+            validate: {
+                len: [2, 30]
+            }
         }
     }
 )

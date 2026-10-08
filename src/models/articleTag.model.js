@@ -7,12 +7,16 @@ export const article_tag_model = sequelize.define(
         article_id: {
            type: DataTypes.INTEGER,
             allowNull: false,
-            unique: "article_tag_unique"
         },
         tag_id: {
               type: DataTypes.INTEGER,
             allowNull: false,
-            unique: "article_tag_unique"
+        }
+    },
+    {
+        indexes: {
+            unique: true,
+            fields: ["article_id", "tag_id"]
         }
     }
 );
